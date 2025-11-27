@@ -1,5 +1,4 @@
-import React from "react";
-
+import AnimatedGridBackground from "../AnimatedGridBackground";
 
 const approachSteps = [
   {
@@ -22,8 +21,9 @@ const approachSteps = [
 
 function Timeline() {
   return (
-    <section className="py-12 px-4 bg-white">
-      <div className="container mx-auto">
+    <section className="relative py-12 px-4 bg-blue-50 overflow-hidden">
+      <AnimatedGridBackground />
+      <div className="container mx-auto relative z-10">
         <h2 className="text-4xl font-semibold text-center mb-4 text-primary">Our Approach</h2>
         <p className="text-gray-500 text-lg text-center max-w-2xl mx-auto mb-16">
           A strategic and transparent approach to help your business grow with powerful AI solutions.
@@ -39,9 +39,9 @@ function Timeline() {
 
                 {/* Content Side */}
                 <div className="w-full md:w-1/2 px-6">
-                  <div className={`bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-100 text-center md:text-left hover:shadow-md transition-shadow ${index % 2 === 0 ? 'md:text-right' : ''}`}>
-                    <h5 className="text-xl font-bold text-primary mb-2">{step.title}</h5>
-                    <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
+                  <div className={`bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-100 text-center md:text-left hover:shadow-md transition-all duration-1000 group hover:bg-blue-600 ${index % 2 === 0 ? 'md:text-right' : ''}`}>
+                    <h5 className="text-xl font-bold text-primary mb-2 group-hover:text-white transition-colors duration-300">{step.title}</h5>
+                    <p className="text-gray-600 text-sm leading-relaxed group-hover:text-blue-100 transition-colors duration-300">{step.description}</p>
                   </div>
                 </div>
 

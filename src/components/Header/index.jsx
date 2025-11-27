@@ -8,6 +8,8 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -19,20 +21,33 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch('/api/Service');
+        if (response.ok) {
+          const data = await response.json();
+          setServices(data.sort((a, b) => a.displayOrder - b.displayOrder));
+        }
+      } catch (error) {
+        console.error("Failed to fetch services", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchServices();
+  }, []);
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
     {
       name: 'Services',
       path: '/services',
-      dropdown: [
-        { name: 'Technology Advisory', slug: 'technology-advisory' },
-        { name: 'Cloud Consulting', slug: 'cloud-consulting-and-migration' },
-        { name: 'Infrastructure Mgmt', slug: 'infrastructure-management' },
-        { name: 'Digital Modernization', slug: 'digital-modernization' },
-        { name: 'Managed IT Services', slug: 'managed-it-services' },
-        { name: 'AI Automation', slug: 'ai-automation' },
-      ]
+      dropdown: services.map(service => ({
+        name: service.title,
+        id: service.id
+      }))
     },
   ];
 
@@ -67,19 +82,29 @@ const Header = () => {
 
                     {/* Dropdown Menu */}
                     <div className={`absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden transition-all duration-300 origin-top-left ${dropdownOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}>
-                      {link.dropdown.map((item) => (
-                        <div
-                          key={item.slug}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            navigate(`/services/servicePages/${item.slug}`);
-                            setDropdownOpen(false);
-                          }}
-                          className="px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-primary cursor-pointer transition-colors text-base border-b border-gray-50 last:border-none"
-                        >
-                          {item.name}
+                      {loading ? (
+                        <div className="px-6 py-3 text-gray-500 text-sm">
+                          Loading services...
                         </div>
-                      ))}
+                      ) : services.length === 0 ? (
+                        <div className="px-6 py-3 text-gray-500 text-sm">
+                          No services found.
+                        </div>
+                      ) : (
+                        link.dropdown.map((item) => (
+                          <div
+                            key={item.id}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate(`/services/servicePages/${item.id}`);
+                              setDropdownOpen(false);
+                            }}
+                            className="px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-primary cursor-pointer transition-colors text-base border-b border-gray-50 last:border-none"
+                          >
+                            {item.name}
+                          </div>
+                        ))
+                      )}
                     </div>
                   </div>
                 ) : (
@@ -111,7 +136,7 @@ const Header = () => {
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className={scrolled ? 'text-gray-800' : 'text-white'}>
+            <button onClick={() => setIsOpen(!isOpen)} className={scrolled ? 'text-gray-800' : 'text-gray-800'}>
               {isOpen ? <HiX size={30} /> : <HiMenuAlt3 size={30} />}
             </button>
           </div>
@@ -147,9 +172,9 @@ const Header = () => {
                       <div className="pl-4 flex flex-col gap-3 border-l-2 border-blue-100 ml-2">
                         {link.dropdown.map((item) => (
                           <div
-                            key={item.slug}
+                            key={item.id}
                             onClick={() => {
-                              navigate(`/services/servicePages/${item.slug}`);
+                              navigate(`/services/servicePages/${item.id}`);
                               setIsOpen(false);
                             }}
                             className="text-gray-600 hover:text-primary py-1"

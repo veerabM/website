@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaFacebookSquare, FaInstagramSquare, FaLinkedin, FaTwitterSquare } from 'react-icons/fa';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Footer = ({ hidebutto = false }) => {
   const navigate = useNavigate();
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch('/api/Service');
+        if (response.ok) {
+          const data = await response.json();
+          setServices(data.sort((a, b) => a.displayOrder - b.displayOrder));
+        }
+      } catch (error) {
+        console.error("Failed to fetch services", error);
+      }
+    };
+    fetchServices();
+  }, []);
 
   return (
     <>
@@ -32,7 +48,7 @@ const Footer = ({ hidebutto = false }) => {
       </div>
 
       {/* Main Footer - Clean & Spacious */}
-      <footer className="bg-gray-50 pt-20 pb-10 border-t border-gray-200">
+      <footer className="bg-gray-50 pt-20 pb-4 border-t border-gray-200">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
@@ -62,12 +78,13 @@ const Footer = ({ hidebutto = false }) => {
             <div>
               <h5 className="text-lg font-bold text-gray-800 mb-6">Services</h5>
               <ul className="space-y-3">
-                <li><Link to="/services/technology-advisory" className="text-gray-600 hover:text-primary transition-colors">Technology Advisory</Link></li>
-                <li><Link to="/services/cloud-consulting-and-migration" className="text-gray-600 hover:text-primary transition-colors">Cloud Consulting</Link></li>
-                <li><Link to="/services/infrastructure-management" className="text-gray-600 hover:text-primary transition-colors">Infrastructure Management</Link></li>
-                <li><Link to="/services/managed-it-services" className="text-gray-600 hover:text-primary transition-colors">Managed IT Services</Link></li>
-                <li><Link to="/services/ai-automation" className="text-gray-600 hover:text-primary transition-colors">AI Automation</Link></li>
-                <li><Link to="/services/digital-modernization" className="text-gray-600 hover:text-primary transition-colors">Digital Modernization</Link></li>
+                {services.map((service) => (
+                  <li key={service.id}>
+                    <Link to={`/services/servicePages/${service.id}`} className="text-gray-600 hover:text-primary transition-colors">
+                      {service.title}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -102,7 +119,7 @@ const Footer = ({ hidebutto = false }) => {
 
           </div>
 
-          <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="border-t border-gray-200 pt-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-500 text-sm">© 2025 AIZero. All Rights Reserved.</p>
             <div className="flex gap-6 text-sm text-gray-500">
               <Link to="/privacy" className="hover:text-primary">Privacy Policy</Link>

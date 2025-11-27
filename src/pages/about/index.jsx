@@ -2,6 +2,7 @@ import Hero from "../../components/Hero";
 import AboutUS from "../../assets/HeyAIZ.png"
 import CoreValues from "../../components/CoreValue";
 import FAQ from "../../components/FAQ";
+import AnimatedGridBackground from "../../components/AnimatedGridBackground";
 
 function About() {
     return (
@@ -39,8 +40,9 @@ function About() {
                 </div>
             </div>
 
-            <div className="py-20 bg-gray-50">
-                <div className="container mx-auto px-4">
+            <div className="relative py-20 bg-blue-50 overflow-hidden">
+                <AnimatedGridBackground />
+                <div className="container mx-auto px-4 relative z-10">
                     <h3 className="text-4xl font-semibold mb-4 text-center text-primary">Our Core Values</h3>
                     <p className="text-gray-500 text-lg text-center max-w-3xl mx-auto mb-12">
                         AIZero adheres to a set of core values in all business dealings. All our employees are expected to take ownership of these values and incorporate them into their everyday activities.

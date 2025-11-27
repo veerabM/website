@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowRight } from "react-icons/fa";
 
-function Card({ CardImg, CardTitle, CardText, slug }) {
+function Card({ CardImg, CardTitle, CardText, id }) {
   const navigate = useNavigate();
 
   return (
@@ -29,7 +29,7 @@ function Card({ CardImg, CardTitle, CardText, slug }) {
         </p>
 
         <button
-          onClick={() => navigate(`/services/servicePages/${slug}`)}
+          onClick={() => navigate(`/services/servicePages/${id}`)}
           className="flex items-center gap-2 text-primary font-semibold text-sm group-hover:text-accent transition-colors mt-auto"
         >
           Learn More <FaArrowRight size={12} />

@@ -92,7 +92,7 @@ function Contact() {
                                 </p>
 
                                 <div className="space-y-8">
-                                    <div className="flex items-start gap-6 group">
+                                    {/* <div className="flex items-start gap-6 group">
                                         <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent text-xl group-hover:bg-accent group-hover:text-white transition-all duration-300">
                                             <FaMapMarkerAlt />
                                         </div>
@@ -110,7 +110,7 @@ function Contact() {
                                             <h4 className="text-lg font-bold text-primary mb-1">Call Us</h4>
                                             <p className="text-text-muted">+1 (555) 123-4567</p>
                                         </div>
-                                    </div>
+                                    </div> */}
 
                                     <div className="flex items-start gap-6 group">
                                         <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent text-xl group-hover:bg-accent group-hover:text-white transition-all duration-300">

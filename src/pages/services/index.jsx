@@ -40,14 +40,14 @@ function Services() {
             />
 
             <div className="py-20">
-                <div className="container mx-auto px-4">
+                <div className="container w-full md:w-4/5 mx-auto px-4">
                     <h3 className="text-4xl font-semibold text-center mb-4 text-primary">Solutions You Can Trust</h3>
                     <p className="text-gray-500 text-lg text-center max-w-2xl mx-auto mb-16">Trusted solutions for seamless business transformation</p>
 
-                    
-                        {loading ? (
-                            <div className='py-20'> <Loader /></div>
-                        ) :(<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    {loading ? (
+                        <div className='py-20'> <Loader /></div>
+                    ) : (<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {services.map((item) => (
                             <Card
                                 key={item.id}
@@ -57,8 +57,8 @@ function Services() {
                                 id={item.id}
                             />
                         ))}
-                        </div>)
-                        }
+                    </div>)
+                    }
                 </div>
             </div>
 

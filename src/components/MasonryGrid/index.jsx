@@ -17,7 +17,7 @@ const projects = [
 const MasonryGrid = () => {
     return (
         <section className="py-24 bg-white">
-            <div className="container mx-auto px-4">
+            <div className="container w-full md:w-4/5 mx-auto px-4">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl font-bold text-primary mb-4">Our Recent Projects</h2>
                     <p className="text-text-muted text-lg max-w-2xl mx-auto">

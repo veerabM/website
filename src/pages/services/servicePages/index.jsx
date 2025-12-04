@@ -30,7 +30,7 @@ function ServiceDetail() {
 
   if (error || !service) {
     return (
-      <div className="py-24 container mx-auto px-4 text-center">
+      <div className="py-24 container w-full md:w-4/5 mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-4">Service Not Found</h2>
         <p className="text-gray-600 mb-8">{error || "The requested service could not be found."}</p>
         <button
@@ -52,10 +52,10 @@ function ServiceDetail() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className=" w-4/5 mx-auto text-start"
+            className=" w-full md:w-4/5 mx-auto text-start"
           >
             {/* Breadcrumbs */}
-            <div className="flex justify-start items-center gap-2 text-blue-200 mb-6 text-sm font-medium">
+            <div className="flex flex-wrap justify-start items-center gap-2 text-blue-200 mb-6 text-sm font-medium">
               <button onClick={() => navigate('/')} className="hover:text-white transition-colors">Home</button>
               <span>/</span>
               <button onClick={() => navigate('/services')} className="hover:text-white transition-colors">Services</button>
@@ -71,7 +71,7 @@ function ServiceDetail() {
 
       {/* Content Section */}
       <div className="py-24 bg-white">
-        <div className="container w-4/5 mx-auto px-4">
+        <div className="container w-full md:w-4/5 mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-16 items-start">
 
             {/* Main Description */}

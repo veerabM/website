@@ -74,7 +74,7 @@ function Contact() {
             />
 
             <section className="relative py-24 md:py-32" id="contact">
-                <div className="container mx-auto px-4">
+                <div className="container w-full md:w-4/5 mx-auto px-4">
                     <div className="flex flex-col lg:flex-row gap-16 max-w-7xl mx-auto">
 
                         {/* Contact Info Side */}

@@ -11,7 +11,7 @@ function TermsOfService() {
                 HeroText="Please read these terms and conditions carefully before using our service."
             />
             <div className="py-24 bg-white">
-                <div className="container mx-auto px-4 max-w-4xl">
+                <div className="container w-full md:w-4/5 mx-auto px-4 max-w-4xl">
                     <div className="prose prose-lg text-gray-600 leading-relaxed">
                         <p className="mb-6">Last updated: January 01, 2025</p>
 

@@ -31,7 +31,7 @@ const values = [
 const CoreValues = () => {
   return (
     <section className="py-8 bg-transparent">
-      <div className="container mx-auto px-4">
+      <div className="container w-full md:w-4/5 mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {values.map((val, idx) => (
             <div key={idx} className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center h-full flex flex-col items-center">

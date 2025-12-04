@@ -30,7 +30,7 @@ const Stats = () => {
       {/* Animated Grid Background */}
       <AnimatedGridBackground />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container w-full md:w-4/5 mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ const Stats = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Driven by What Matters</h2>
-          <p className="text-text-muted text-lg max-w-2xl mx-auto">
+          <p className="text-text-muted text-lg w-full md:w-4/5 mx-auto">
             Our focus is on trust, quality, and forward-thinking ideas—ensuring tech that works seamlessly for you.
           </p>
         </motion.div>

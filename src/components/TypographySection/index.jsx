@@ -14,7 +14,7 @@ const TypographySection = () => {
                 {/* Subtle Vignette */}
                 <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-slate-950/50"></div>
             </div>
-            <div className="container mx-auto px-4 relative z-10">
+            <div className="container w-full md:w-4/5 mx-auto px-4 relative z-10">
                 {/* Main Typography */}
                 <div className="text-center space-y-4">
                     {["Innovate.", "Automate.", "Scale."].map((word, index) => (

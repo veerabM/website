@@ -67,7 +67,7 @@ const ResponsiveCarousel = () => {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
+      <div className="relative z-10 container w-full md:w-4/5 mx-auto px-4 h-full flex items-center">
         <div className="max-w-3xl pl-4 md:pl-12 lg:pl-20">
           <AnimatePresence mode='wait'>
             <motion.div
@@ -113,7 +113,7 @@ const ResponsiveCarousel = () => {
 
       {/* Progress Indicators */}
       <div className="absolute bottom-12 left-0 w-full z-20">
-        <div className="container mx-auto px-4 pl-8 md:pl-16 lg:pl-24">
+        <div className="container w-full md:w-4/5 mx-auto px-4 pl-8 md:pl-16 lg:pl-24">
           <div className="flex gap-4 items-center">
             {carouselItems.map((_, index) => (
               <button

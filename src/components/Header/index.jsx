@@ -60,7 +60,7 @@ const Header = () => {
 
   return (
     <header className={headerClass}>
-      <div className="container mx-auto px-4">
+      <div className="container w-full md:w-4/5 mx-auto px-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>

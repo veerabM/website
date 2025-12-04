@@ -29,7 +29,7 @@ function Home() {
 
       {/* Why AIZero Section */}
       <div className="py-24 md:pt-36 bg-white">
-        <div className="container w-4/5 mx-auto px-4">
+        <div className="container w-full md:w-4/5 mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             {/* Text Content */}
             <motion.div
@@ -82,9 +82,9 @@ function Home() {
         <AnimatedGridBackground />
 
         <div className="relative">
-          <div className="container mx-auto px-4">
+          <div className="container w-full md:w-4/5 mx-auto px-4">
             <div className="flex flex-col md:flex-row items-center gap-12 max-w-6xl mx-auto">
-              <div className="w-full px-8 md:w-1/2 md:px-0">
+              <div className="w-full md:w-1/2 md:px-0">
                 <h3 className="text-3xl md:text-4xl font-bold text-primary mb-6">Our Goal</h3>
                 <p className="text-lg text-text-muted leading-relaxed mb-6">
                   To be the catalyst for digital evolution, empowering businesses to reach new heights of efficiency and innovation.

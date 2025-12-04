@@ -33,7 +33,7 @@ function Timeline() {
   return (
     <section className="relative py-24 md:py-32 bg-bg-subtle overflow-hidden">
       <AnimatedGridBackground />
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container w-full md:w-4/5 mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -25,7 +25,7 @@ const Footer = ({ hidebutto = false }) => {
       {/* Strap Section - Modern Gradient */}
       <div className="w-full bg-linear-to-r from-primary to-blue-700 text-white py-20 relative overflow-hidden">
 
-        <div className="container w-4/5 mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
+        <div className="container w-full md:w-4/5 mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
           <div className="text-center md:text-left max-w-2xl">
             <h4 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
               Ready to accelerate your growth?
@@ -48,7 +48,7 @@ const Footer = ({ hidebutto = false }) => {
 
       {/* Main Footer - Clean & Spacious */}
       <footer className="bg-gray-50 pt-20 pb-4 border-t border-gray-200">
-        <div className="container mx-auto px-4">
+        <div className="container w-full md:w-4/5 mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 
             {/* Column 1: Company Info */}

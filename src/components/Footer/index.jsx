@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../../services/api';
-import { FaFacebookSquare, FaInstagramSquare, FaLinkedin, FaTwitterSquare } from 'react-icons/fa';
+import { FaFacebookSquare, FaInstagramSquare, FaLinkedin } from 'react-icons/fa';
+import { FaSquareXTwitter } from "react-icons/fa6";
 import { useNavigate, Link } from 'react-router-dom';
 
 const Footer = ({ hidebutto = false }) => {
@@ -36,7 +37,7 @@ const Footer = ({ hidebutto = false }) => {
           {!hidebutto && (
             <button
               type="button"
-              className="px-10 py-4 bg-accent text-white font-bold rounded-full hover:bg-accent-50 transition-all shadow-lg hover:shadow-orange-500/40 transform hover:-translate-y-1 shine-effect"
+              className="btn-orange whitespace-nowrap"
               onClick={() => navigate('/contact')}
             >
               Contact Us
@@ -52,7 +53,7 @@ const Footer = ({ hidebutto = false }) => {
 
             {/* Column 1: Company Info */}
             <div>
-              <h5 className="text-2xl font-bold text-primary mb-6">AIZero</h5>
+              <h5 className="text-2xl font-bold text-primary mb-6">Aizero</h5>
               <p className="text-gray-600 leading-relaxed mb-6">
                 Empowering businesses with intelligent technology solutions. We build the future, today.
               </p>
@@ -67,7 +68,7 @@ const Footer = ({ hidebutto = false }) => {
                   <FaLinkedin size={24} />
                 </a>
                 <a href="https://twitter.com" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors transform hover:scale-110">
-                  <FaTwitterSquare size={24} />
+                  <FaSquareXTwitter size={24} />
                 </a>
               </div>
             </div>

@@ -27,7 +27,7 @@ function Services() {
         fetchServices();
     }, []);
 
-    if (loading) return <div className='py-20'> <Loader /></div>;
+    // if (loading) return <div className='py-20'> <Loader /></div>;
     if (error) return <div className="text-center py-20 text-red-600">Error: {error}</div>;
 
     return (
@@ -44,7 +44,10 @@ function Services() {
                     <h3 className="text-4xl font-semibold text-center mb-4 text-primary">Solutions You Can Trust</h3>
                     <p className="text-gray-500 text-lg text-center max-w-2xl mx-auto mb-16">Trusted solutions for seamless business transformation</p>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                        {loading ? (
+                            <div className='py-20'> <Loader /></div>
+                        ) :(<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {services.map((item) => (
                             <Card
                                 key={item.id}
@@ -54,7 +57,8 @@ function Services() {
                                 id={item.id}
                             />
                         ))}
-                    </div>
+                        </div>)
+                        }
                 </div>
             </div>
 

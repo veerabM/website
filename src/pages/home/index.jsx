@@ -4,8 +4,10 @@ import AIZlogo from "../../assets/AIZLogo.png"
 import ProfileImage from "../../assets/profile.jpg";
 import Stats from "../../components/Stats";
 import Carousel from "../../components/Carousel";
-import Card from "../../components/Card";
 import { motion } from "framer-motion";
+import AnimatedGridBackground from "../../components/AnimatedGridBackground";
+import TypographySection from "../../components/TypographySection";
+// import MasonryGrid from "../../components/MasonryGrid";
 
 function Home() {
   return (
@@ -19,33 +21,35 @@ function Home() {
 
       <Stats />
 
-
-
       <Carousel />
 
+      <TypographySection />
+
+      {/* <MasonryGrid /> */}
+
       {/* Why AIZero Section */}
-      <div className="py-24 bg-white">
+      <div className="py-24 md:pt-36 bg-white">
         <div className="container w-4/5 mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-16">
             {/* Text Content */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               className="w-full lg:w-1/2"
             >
               <h3 className="text-4xl font-bold text-primary mb-6">Why AIZero?</h3>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6 text-justify">
+              <p className="text-text-muted text-lg leading-relaxed mb-6 text-justify">
                 We are a fast-growing team of highly skilled, passionate IT professionals with excellence in service delivery, enabling faster innovation and higher productivity.
               </p>
-              <p className="text-gray-600 text-lg leading-relaxed mb-8 text-justify">
+              <p className="text-text-muted text-lg leading-relaxed mb-8 text-justify">
                 Our services are dynamic, scalable, resilient, and responsive. Our highly collaborative approach aligns our services with your business goals.
               </p>
 
               <button
                 onClick={() => window.location.href = '/#/about'}
-                className="px-8 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary hover:text-white transition-all duration-300"
+                className="btn-blue"
               >
                 Explore About Us
               </button>
@@ -72,42 +76,47 @@ function Home() {
         </div>
       </div>
 
-      {/* <div className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="mb-16"
-          >
-            <h3 className="text-4xl font-semibold text-center mb-4 text-primary">Solutions You Can Trust</h3>
-            <p className="text-gray-500 text-lg text-center max-w-2xl mx-auto">Trusted solutions for seamless business transformation</p>
-          </motion.div>
+      {/* Our Goal Section */}
+      <section className="relative pb-20 md:pt-32 md:pb-32 overflow-hidden bg-bg-subtle">
+        {/* Animated Grid Background */}
+        <AnimatedGridBackground />
 
-          <div className="flex flex-wrap justify-center gap-32">
-            <Card
-              CardImg={ProfileImage}
-              CardTitle={"AIZero Solutions"}
-              CardText={"Discover the power of ."}
-              showButton={true}
-            />
-            <Card
-              CardImg={ProfileImage}
-              CardTitle={"AIZero Solutions"}
-              CardText={"Discover the power of ."}
-              showButton={true}
-            />
-            <Card
-              CardImg={ProfileImage}
-              CardTitle={"AIZero Solutions"}
-              CardText={"Discover the power of ."}
-              showButton={true}
-            />
-
+        <div className="relative">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col md:flex-row items-center gap-12 max-w-6xl mx-auto">
+              <div className="w-full px-8 md:w-1/2 md:px-0">
+                <h3 className="text-3xl md:text-4xl font-bold text-primary mb-6">Our Goal</h3>
+                <p className="text-lg text-text-muted leading-relaxed mb-6">
+                  To be the catalyst for digital evolution, empowering businesses to reach new heights of efficiency and innovation.
+                </p>
+                <ul className="space-y-4">
+                  {[
+                    "Drive sustainable growth through technology",
+                    "Foster a culture of continuous innovation",
+                    "Deliver measurable value to our partners",
+                    "Build long-lasting, trust-based relationships"
+                  ].map((goal, index) => (
+                    <li key={index} className="flex items-center gap-3 text-gray-700">
+                      <span className="w-2 h-2 rounded-full bg-accent"></span>
+                      {goal}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="w-full md:w-1/2">
+                <div className="relative p-8 glass-card rounded-2xl border border-white/20">
+                  {/* <div className="absolute -top-4 -right-4 w-24 h-24 bg-accent/10 rounded-full blur-xl"></div> */}
+                  {/* <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/5 rounded-full blur-xl"></div> */}
+                  <h4 className="text-2xl font-bold text-primary mb-4 relative z-10">Vision 2030</h4>
+                  <p className="text-gray-600 relative z-10">
+                    By 2030, we aim to be a global leader in AI-driven enterprise solutions, helping over 1000+ businesses transform their operations and achieve carbon neutrality through smart, efficient technologies.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div> */}
+      </section>
     </div>
   );
 }

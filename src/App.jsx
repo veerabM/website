@@ -16,12 +16,18 @@ import AdminRoute from './components/AdminRoute';
 import AdminLayout from './layouts/AdminLayout';
 import ServiceList from './pages/admin/services/ServiceList';
 import ServiceForm from './pages/admin/services/ServiceForm';
+import MessageList from './pages/admin/messages/MessageList';
+import MessageDetails from './pages/admin/messages/MessageDetails';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <Router>
       <AuthProvider>
         <ScrollToTop />
+        <ToastContainer position="top-right" autoClose={5000} />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
@@ -45,6 +51,8 @@ function App() {
             <Route path="services" element={<ServiceList />} />
             <Route path="services/new" element={<ServiceForm />} />
             <Route path="services/:id" element={<ServiceForm />} />
+            <Route path="messages" element={<MessageList />} />
+            <Route path="messages/:id" element={<MessageDetails />} />
           </Route>
         </Routes>
       </AuthProvider>

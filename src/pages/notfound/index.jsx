@@ -40,13 +40,13 @@ function NotFound() {
                 >
                     <button
                         onClick={() => navigate(-1)}
-                        className="px-8 py-3 bg-white border-2 border-primary text-primary font-semibold rounded-full hover:bg-primary hover:text-white transition-all duration-300 mr-4 shadow-md"
+                        className="btn-blue mr-4"
                     >
                         Go Back
                     </button>
                     <button
                         onClick={() => navigate('/')}
-                        className="px-8 py-3 bg-accent text-white font-semibold rounded-full hover:bg-orange-600 transition-all duration-300 shadow-lg shine-effect"
+                        className="btn-orange shine-effect"
                     >
                         Back to Home
                     </button>

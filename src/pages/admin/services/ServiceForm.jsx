@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { api } from '../../../services/api';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
+import { validateServiceForm } from '../../../utils/validation';
 
 const ServiceForm = () => {
     const { id } = useParams();
@@ -16,7 +17,8 @@ const ServiceForm = () => {
         displayOrder: 0
     });
     const [loading, setLoading] = useState(isEditMode);
-    const [error, setError] = useState('');
+    const [generalError, setGeneralError] = useState('');
+    const [fieldErrors, setFieldErrors] = useState({});
     const [saving, setSaving] = useState(false);
 
     useEffect(() => {
@@ -35,7 +37,7 @@ const ServiceForm = () => {
                 displayOrder: data.displayOrder || 0
             });
         } catch (err) {
-            setError(err.message);
+            setGeneralError(err.message);
         } finally {
             setLoading(false);
         }
@@ -47,12 +49,26 @@ const ServiceForm = () => {
             ...prev,
             [name]: name === 'displayOrder' ? parseInt(value) || 0 : value
         }));
+
+        // Clear field error when user types
+        if (fieldErrors[name]) {
+            setFieldErrors(prev => ({ ...prev, [name]: '' }));
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const { isValid, errors: validationErrors } = validateServiceForm(formData);
+
+        if (!isValid) {
+            setFieldErrors(validationErrors);
+            return;
+        }
+
         setSaving(true);
-        setError('');
+        setGeneralError('');
+        setFieldErrors({});
 
         try {
             if (isEditMode) {
@@ -63,7 +79,7 @@ const ServiceForm = () => {
 
             navigate('/admin/services');
         } catch (err) {
-            setError(err.message);
+            setGeneralError(err.message);
         } finally {
             setSaving(false);
         }
@@ -72,14 +88,14 @@ const ServiceForm = () => {
     if (loading) return <div>Loading...</div>;
 
     return (
-        <div className="max-w-2xl mx-auto">
+        <div className="mx-auto">
             <h1 className="text-2xl font-bold mb-6 text-gray-800">
                 {isEditMode ? 'Edit Service' : 'Add New Service'}
             </h1>
 
-            {error && (
+            {generalError && (
                 <div className="bg-red-100 text-red-700 p-4 rounded mb-6">
-                    {error}
+                    {generalError}
                 </div>
             )}
 
@@ -89,7 +105,7 @@ const ServiceForm = () => {
                         Title
                     </label>
                     <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${fieldErrors.title ? 'border-red-500' : ''}`}
                         id="title"
                         name="title"
                         type="text"
@@ -97,6 +113,7 @@ const ServiceForm = () => {
                         onChange={handleChange}
                         required
                     />
+                    {fieldErrors.title && <p className="text-red-500 text-xs italic mt-1">{fieldErrors.title}</p>}
                 </div>
 
                 <div className="mb-4">
@@ -104,13 +121,14 @@ const ServiceForm = () => {
                         Short Description
                     </label>
                     <textarea
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${fieldErrors.shortDescription ? 'border-red-500' : ''}`}
                         id="shortDescription"
                         name="shortDescription"
                         rows="3"
                         value={formData.shortDescription}
                         onChange={handleChange}
                     />
+                    {fieldErrors.shortDescription && <p className="text-red-500 text-xs italic mt-1">{fieldErrors.shortDescription}</p>}
                 </div>
 
                 <div className="mb-4">
@@ -118,13 +136,14 @@ const ServiceForm = () => {
                         Full Description
                     </label>
                     <textarea
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${fieldErrors.description ? 'border-red-500' : ''}`}
                         id="description"
                         name="description"
                         rows="6"
                         value={formData.description}
                         onChange={handleChange}
                     />
+                    {fieldErrors.description && <p className="text-red-500 text-xs italic mt-1">{fieldErrors.description}</p>}
                 </div>
 
                 <div className="mb-6">
@@ -132,13 +151,14 @@ const ServiceForm = () => {
                         Display Order
                     </label>
                     <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${fieldErrors.displayOrder ? 'border-red-500' : ''}`}
                         id="displayOrder"
                         name="displayOrder"
                         type="number"
                         value={formData.displayOrder}
                         onChange={handleChange}
                     />
+                    {fieldErrors.displayOrder && <p className="text-red-500 text-xs italic mt-1">{fieldErrors.displayOrder}</p>}
                 </div>
 
                 <div className="flex items-center justify-between">

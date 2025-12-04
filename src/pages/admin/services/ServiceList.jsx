@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { api } from '../../../services/api';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
+import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
 
 const ServiceList = () => {
     const [services, setServices] = useState([]);
@@ -77,16 +78,26 @@ const ServiceList = () => {
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <Link
-                                            to={`/admin/services/${service.id}`}
-                                            className="text-indigo-600 hover:text-indigo-900 mr-4"
+                                            to={`/services/servicePages/${service.id}`}
+                                            target="_blank"
+                                            className="text-green-600 hover:text-green-900 mr-4 inline-block"
+                                            title="View"
                                         >
-                                            Edit
+                                            <FaEye size={18} />
+                                        </Link>
+                                        <Link
+                                            to={`/admin/services/${service.id}`}
+                                            className="text-indigo-600 hover:text-indigo-900 mr-4 inline-block"
+                                            title="Edit"
+                                        >
+                                            <FaEdit size={18} />
                                         </Link>
                                         <button
                                             onClick={() => handleDelete(service.id)}
-                                            className="text-red-600 hover:text-red-900"
+                                            className="text-red-600 hover:text-red-900 inline-block"
+                                            title="Delete"
                                         >
-                                            Delete
+                                            <FaTrash size={18} />
                                         </button>
                                     </td>
                                 </tr>

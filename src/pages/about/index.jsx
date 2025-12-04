@@ -40,6 +40,8 @@ function About() {
                 </div>
             </div>
 
+
+
             <div className="relative py-20 bg-blue-50 overflow-hidden">
                 <AnimatedGridBackground />
                 <div className="container mx-auto px-4 relative z-10">

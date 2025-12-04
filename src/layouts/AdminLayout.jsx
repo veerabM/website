@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FaBars, FaTimes, FaTachometerAlt, FaList, FaSignOutAlt } from 'react-icons/fa';
+import { FaBars, FaTimes, FaTachometerAlt, FaList, FaSignOutAlt, FaEnvelope } from 'react-icons/fa';
 
 const AdminLayout = () => {
     const { logout, user } = useAuth();
@@ -60,6 +60,14 @@ const AdminLayout = () => {
                     >
                         <FaList className="mr-3" />
                         Services
+                    </Link>
+                    <Link
+                        to="/admin/messages"
+                        onClick={closeSidebar}
+                        className={`${isActive('/admin/messages')} group flex items-center px-2 py-2 text-sm font-medium rounded-md`}
+                    >
+                        <FaEnvelope className="mr-3" />
+                        Messages
                     </Link>
                 </nav>
 

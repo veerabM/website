@@ -52,6 +52,40 @@ export const api = {
         return response.status === 204 ? null : response.json();
     },
 
+    // Messages
+    postMessage: async (messageData) => {
+        const response = await fetch(`${API_BASE_URL}/Messages`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(messageData)
+        });
+        if (!response.ok) throw new Error('Failed to send message');
+        return response.json();
+    },
+
+    getMessages: async (token) => {
+        const response = await fetch(`${API_BASE_URL}/Messages`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        if (!response.ok) throw new Error('Failed to fetch messages');
+        return response.json();
+    },
+
+    deleteMessage: async (id, token) => {
+        const response = await fetch(`${API_BASE_URL}/Messages/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        if (!response.ok) throw new Error('Failed to delete message');
+        return response.status === 204 ? null : response.json();
+    },
+
     // Auth
     login: async (credentials) => {
         const response = await fetch(`${API_BASE_URL}/Auth/login`, {

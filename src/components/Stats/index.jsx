@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, animate } from "framer-motion";
-import { FaSmile, FaProjectDiagram, FaClock, FaUserFriends } from "react-icons/fa";
+import { FaFingerprint, FaShieldAlt, FaSmileBeam, FaLightbulb } from "react-icons/fa";
 import AnimatedGridBackground from "../AnimatedGridBackground";
 
 const Counter = ({ from, to, duration }) => {
@@ -14,41 +14,52 @@ const Counter = ({ from, to, duration }) => {
     return () => controls.stop();
   }, [from, to, duration]);
 
-  return <span>{count}+</span>;
+  return <span>{count}%</span>;
 };
 
 const Stats = () => {
   const statsData = [
-    { label: "Happy Clients", value: 232, icon: <FaSmile /> },
-    { label: "Projects", value: 521, icon: <FaProjectDiagram /> },
-    { label: "Hours Of Support", value: 1453, icon: <FaClock /> },
-    { label: "Hard Workers", value: 32, icon: <FaUserFriends /> },
+    { label: "Authenticity", value: 100, icon: <FaFingerprint /> },
+    { label: "Security", value: 100, icon: <FaShieldAlt /> },
+    { label: "User Experienc", value: 100, icon: <FaSmileBeam /> },
+    { label: "Innovation", value: 100, icon: <FaLightbulb /> },
   ];
 
   return (
-    <section className="relative py-32 overflow-hidden bg-blue-50 text-gray-800">
-      {/* Animated Grid Background */}
+    <section className="relative py-24 md:py-32 overflow-hidden bg-bg-subtle">
       {/* Animated Grid Background */}
       <AnimatedGridBackground />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-10 max-w-5xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Driven by What Matters</h2>
+          <p className="text-text-muted text-lg max-w-2xl mx-auto">
+            Our focus is on trust, quality, and forward-thinking ideas—ensuring tech that works seamlessly for you.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8 max-w-6xl mx-auto">
           {statsData.map((stat, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="bg-white/80 backdrop-blur-sm border border-gray-100 p-12 flex flex-col items-center justify-center text-center shadow-xl hover:shadow-2xl hover:-translate-y-3 hover:bg-blue-600 transition-all duration-1000 group"
+              className="glass-card p-8 flex flex-col items-center justify-center text-center group"
             >
-              <div className="text-3xl md:text-5xl mb-6 text-blue-600 group-hover:text-white group-hover:scale-110 transition-all duration-300">
+              <div className="text-4xl md:text-5xl mb-6 text-primary/80 group-hover:text-accent group-hover:scale-110 transition-all duration-300">
                 {stat.icon}
               </div>
-              <h3 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 group-hover:text-white transition-colors duration-300">
-                <Counter from={0} to={stat.value} duration={2.5} />
+              <h3 className="text-3xl md:text-4xl font-bold mb-2 text-primary group-hover:text-primary transition-colors duration-300">
+                <Counter from={0} to={stat.value} duration={5} />
               </h3>
-              <p className="text-xl md:text-2xl text-gray-600 font-medium uppercase tracking-widest group-hover:text-blue-100 transition-colors duration-300">
+              <p className="text-sm md:text-base text-text-muted font-medium uppercase tracking-wider group-hover:text-accent transition-colors duration-300">
                 {stat.label}
               </p>
             </motion.div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { api } from '../../services/api';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../../assets/aiz1.png';
@@ -8,7 +9,8 @@ import { IoChevronDown } from "react-icons/io5";
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false); // Desktop dropdown
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false); // Mobile dropdown
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -50,11 +52,11 @@ const Header = () => {
   ];
 
   // Dynamic classes based on scroll state
-  const headerClass = `fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-white py-4'
+  const headerClass = `fixed w-full z-[100] transition-all duration-300 ${scrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : 'bg-white backdrop-blur-md py-4'
     }`;
 
-  const textColorClass = scrolled ? 'text-gray-800 hover:text-primary' : 'text-gray-800 hover:text-primary';
-  const activeLinkClass = scrolled ? 'text-primary font-semibold' : 'text-primary font-semibold';
+  const textColorClass = 'text-gray-800 hover:text-primary';
+  const activeLinkClass = 'text-primary font-semibold';
 
   return (
     <header className={headerClass}>
@@ -123,10 +125,7 @@ const Header = () => {
           <div className="hidden md:block">
             <button
               onClick={() => navigate('/contact')}
-              className={`px-6 py-2.5 rounded-full font-medium transition-all shadow-lg hover:shadow-xl shine-effect ${scrolled
-                ? 'bg-accent text-white hover:bg-accent-50 '
-                : 'bg-white text-primary hover:bg-gray-100'
-                }`}
+              className={scrolled ? 'btn-orange' : 'btn-blue'}
             >
               Contact Us
             </button>
@@ -134,80 +133,88 @@ const Header = () => {
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className={scrolled ? 'text-gray-800' : 'text-gray-800'}>
+            <button onClick={() => setIsOpen(!isOpen)} className="text-gray-800">
               {isOpen ? <HiX size={30} /> : <HiMenuAlt3 size={30} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0  bg-black/50 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setIsOpen(false)} />
+      {/* Mobile Menu Portal */}
+      {createPortal(
+        <>
+          {/* Mobile Menu Overlay */}
+          <div
+            className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-101 md:hidden transition-opacity duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+            onClick={() => setIsOpen(false)}
+          />
 
-      {/* Mobile Menu Sidebar */}
-      <div className={`fixed top-0 right-0 h-full w-[80%] max-w-sm bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="p-6 flex flex-col h-full">
-          <div className="flex justify-between items-center mb-8">
-            <img src={logo} alt="AIZero Logo" className="h-8 w-auto" />
-            <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-primary">
-              <HiX size={28} />
-            </button>
-          </div>
+          {/* Mobile Menu Sidebar */}
+          <div className={`fixed top-0 right-0 h-full w-[80%] max-w-sm bg-white shadow-2xl z-102 transform transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+            <div className="p-6 flex flex-col h-full">
+              <div className="flex justify-between items-center mb-8">
+                <img src={logo} alt="AIZero Logo" className="h-8 w-auto" />
+                <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-primary">
+                  <HiX size={28} />
+                </button>
+              </div>
 
-          <div className="flex flex-col gap-6 overflow-y-auto">
-            {navLinks.map((link) => (
-              <div key={link.name}>
-                {link.dropdown ? (
-                  <div className="space-y-3">
-                    <div
-                      className="flex justify-between items-center text-xl font-semibold text-gray-800"
-                      onClick={() => setDropdownOpen(!dropdownOpen)}
-                    >
-                      {link.name}
-                      <IoChevronDown className={`transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
-                    </div>
-                    {dropdownOpen && (
-                      <div className="pl-4 flex flex-col gap-3 border-l-2 border-blue-100 ml-2">
-                        {link.dropdown.map((item) => (
-                          <div
-                            key={item.id}
-                            onClick={() => {
-                              navigate(`/services/servicePages/${item.id}`);
-                              setIsOpen(false);
-                            }}
-                            className="text-gray-600 hover:text-primary py-1"
-                          >
-                            {item.name}
-                          </div>
-                        ))}
+              <div className="flex flex-col gap-6 overflow-y-auto">
+                {navLinks.map((link) => (
+                  <div key={link.name}>
+                    {link.dropdown ? (
+                      <div className="space-y-3">
+                        <div
+                          className="flex justify-between items-center text-xl font-semibold text-gray-800 cursor-pointer"
+                          onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+                        >
+                          {link.name}
+                          <IoChevronDown className={`transition-transform duration-300 ${mobileDropdownOpen ? 'rotate-180' : ''}`} />
+                        </div>
+
+                        <div className={`pl-4 flex flex-col gap-3 border-l-2 border-blue-100 ml-2 overflow-hidden transition-all duration-300 ${mobileDropdownOpen ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
+                          {link.dropdown.map((item) => (
+                            <div
+                              key={item.id}
+                              onClick={() => {
+                                navigate(`/services/servicePages/${item.id}`);
+                                setIsOpen(false);
+                              }}
+                              className="text-gray-600 hover:text-primary py-1 cursor-pointer"
+                            >
+                              {item.name}
+                            </div>
+                          ))}
+                        </div>
                       </div>
+                    ) : (
+                      <NavLink
+                        to={link.path}
+                        onClick={() => setIsOpen(false)}
+                        className={({ isActive }) =>
+                          `text-xl font-semibold block ${isActive ? 'text-primary' : 'text-gray-800'}`
+                        }
+                      >
+                        {link.name}
+                      </NavLink>
                     )}
                   </div>
-                ) : (
-                  <NavLink
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className={({ isActive }) =>
-                      `text-xl font-semibold block ${isActive ? 'text-primary' : 'text-gray-800'}`
-                    }
-                  >
-                    {link.name}
-                  </NavLink>
-                )}
+                ))}
+                <button
+                  onClick={() => {
+                    navigate('/contact');
+                    setIsOpen(false);
+                  }}
+                  className="mt-4 w-full btn-orange"
+                >
+                  Contact Us
+                </button>
               </div>
-            ))}
-            <button
-              onClick={() => {
-                navigate('/contact');
-                setIsOpen(false);
-              }}
-              className="mt-4 w-full py-3 bg-accent text-white rounded-xl font-semibold shadow-lg"
-            >
-              Contact Us
-            </button>
+            </div>
           </div>
-        </div>
-      </div>
+        </>,
+        document.body
+      )}
     </header>
   );
 };
